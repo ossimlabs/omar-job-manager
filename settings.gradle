@@ -1,0 +1,3 @@
+include 'omar-task-launcher',
+				'omar-task-trigger',
+        'omar-task-bucket-scan'
