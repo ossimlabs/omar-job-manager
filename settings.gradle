@@ -1,3 +1,28 @@
-include 'omar-task-launcher',
-				'omar-task-trigger',
-        'omar-task-bucket-scan'
+pluginManagement {
+    repositories {
+        mavenLocal()
+    }
+}
+
+// Definitions for source dependencies
+def gradleDefaults_repo
+
+if(System.getenv('GRADLE_OFFLINE')) {
+    gradleDefaults_repo = '../gradleDefaults' // Assume the plugin source is a sibling of the current directory
+} else {
+    gradleDefaults_repo = 'https://github.com/ossimlabs/gradleDefaults.git' // Use the github repo
+}
+
+sourceControl {
+    gitRepository(gradleDefaults_repo) {
+        producesModule("io.ossim:gradleDefaults")
+    }
+}
+
+include 'omar-task-launcher'
+include 'omar-task-trigger'
+include 'omar-task-bucket-scan'
+
+project (':omar-task-launcher').projectDir = "${rootProject.projectDir}/omar-task-launcher" as File
+project (':omar-task-trigger').projectDir = "${rootProject.projectDir}/omar-task-trigger" as File
+project (':omar-task-bucket-scan').projectDir = "${rootProject.projectDir}/omar-task-bucket-scan" as File

@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 group = 'omar-job-manager'
-version = '0.0.1-SNAPSHOT'
+version = versionNumber
 sourceCompatibility = 1.8
 
 repositories {

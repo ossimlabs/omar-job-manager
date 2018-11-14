@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        if (!System.getenv('GRADLE_OFFLINE')) {
+            maven { url "https://repo.grails.org/grails/core" }
+            jcenter()
+        }
+    }
+    dependencies {
+        classpath('io.ossim:gradleDefaults:1.0') {
+            version {
+                branch = 'dev'
+            }
+        }
+    }
+}
+
+subprojects { -> project
+    ext {
+        if (project.name == "omar-task-launcher") {
+            jarDir = 'build/libs'
+            jarFile = "omar-task-launcher-${versionNumber}.jar"
+            dockerDir = 'docker'
+            dockerBaseImage = System.getenv('OMAR_OSSIM_BASE_IMAGE') ?: "omar-ossim-base"
+        } else if (project.name == "omar-task-bucket-scan") {
+//            jarDir = 'build/libs'
+//            jarFile = "omar-task-bucket-scan-${versionNumber}.jar"
+//            dockerDir = '../omar-task-launcher/docker'
+            buildDocker = false
+        } else if (project.name == "omar-task-trigger") {
+            jarDir = 'build/libs'
+            jarFile = "omar-task-trigger-${versionNumber}.jar"
+            dockerDir = 'docker'
+            dockerBaseImage = System.getenv('OMAR_BASE_IMAGE') ?: "omar-base"
+        }
+    }
+    apply plugin: 'java-base'
+    apply plugin: 'io.ossim.gradleDefaults'
+    if (project.name == "omar-task-launcher") {
+        buildDockerImage.dependsOn(":omar-task-bucket-scan:publishBootJavaPublicationToDockerBucketRepoRepository")
+    }
+}
+
+apply plugin: 'java-base'
+//apply plugin: 'io.ossim.gradleDefaults'

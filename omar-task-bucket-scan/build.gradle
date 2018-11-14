@@ -16,7 +16,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'maven-publish'
 
 group = 'omar-job-manager'
-version = '0.0.1-SNAPSHOT'
+version = versionNumber
 sourceCompatibility = 1.8
 
 repositories {
@@ -28,9 +28,12 @@ ext {
 	springCloudTaskVersion = '1.2.3.RELEASE'
 }
 
-
 publish {
 	dependsOn assemble
+}
+
+clean.doFirst {
+        file("../omar-task-launcher/docker/.m2/repository").deleteDir()
 }
 
 publishing {
@@ -40,6 +43,10 @@ publishing {
 		}
 	}
 	repositories {
+                maven {
+                    name 'dockerBucketRepo'
+                    url uri('../omar-task-launcher/docker/.m2/repository')
+                }
 		maven {
 			credentials {
 				username System.getenv( 'REPOSITORY_MANAGER_USERNAME' )
