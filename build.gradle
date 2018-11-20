@@ -23,9 +23,6 @@ subprojects { -> project
             dockerDir = 'docker'
             dockerBaseImage = System.getenv('OMAR_OSSIM_BASE_IMAGE') ?: "omar-ossim-base"
         } else if (project.name == "omar-task-bucket-scan") {
-//            jarDir = 'build/libs'
-//            jarFile = "omar-task-bucket-scan-${versionNumber}.jar"
-//            dockerDir = '../omar-task-launcher/docker'
             buildDocker = false
         } else if (project.name == "omar-task-trigger") {
             jarDir = 'build/libs'

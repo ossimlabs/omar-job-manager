@@ -49,10 +49,10 @@ publishing {
                 }
 		maven {
 			credentials {
-				username System.getenv( 'REPOSITORY_MANAGER_USERNAME' )
-				password System.getenv( 'REPOSITORY_MANAGER_PASSWORD' )
+				username System.getenv( 'MAVEN_REPOSITORY_USERNAME' )
+				password System.getenv( 'MAVEN_REPOSITORY_PASSWORD' )
 			}
-			url = "${ System.getenv( 'REPOSITORY_MANAGER_URL' ) }/omar-local-snapshot"
+			url = "${ System.getenv( 'MAVEN_REPOSITORY_URL' ) }/omar-local-snapshot"
 		}
 	}
 }
