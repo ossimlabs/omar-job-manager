@@ -22,7 +22,6 @@ class BucketScanTask implements CommandLineRunner
 	@Override
 	void run( String... strings ) throws Exception
 	{
-		def profileName = 'svc_radiant_omar_1b'
 		def clientRegion = 'us-east-1'
 		def bucketName = 'dg-1b-3090-t1'
 		def startAfter = null
