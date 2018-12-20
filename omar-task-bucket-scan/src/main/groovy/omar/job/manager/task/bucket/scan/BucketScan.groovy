@@ -1,26 +1,34 @@
 package omar.job.manager.task.bucket.scan
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider
+import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.model.ListObjectsV2Request
 import com.amazonaws.services.s3.model.ListObjectsV2Result
 import org.springframework.boot.CommandLineRunner
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Configuration
 
+@Configuration
 class BucketScanTask implements CommandLineRunner
 {
+
+	/**
+	 * Autowired AWSCredentialsProvider used to authenticate the s3Client object with an AWS account
+	 */
+	@Autowired
+	AWSCredentialsProvider awsCredentialsProvider
+
 	@Override
 	void run( String... strings ) throws Exception
 	{
-		def profileName = 'svc_radiant_omar_1b'
 		def clientRegion = 'us-east-1'
 		def bucketName = 'dg-1b-3090-t1'
 		def startAfter = null
 		def delimiter = '/'
 		
-		
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-			.withCredentials( new ProfileCredentialsProvider( profileName ) )
+			.withCredentials( awsCredentialsProvider )
 			.withRegion( clientRegion )
 			.build()
 		

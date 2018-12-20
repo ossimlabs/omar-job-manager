@@ -1,6 +1,7 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+omar-task-launcher/docker/.m2/repository/
 
 ### STS ###
 .apt_generated

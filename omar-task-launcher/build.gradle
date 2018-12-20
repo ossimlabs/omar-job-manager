@@ -1,6 +1,9 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.17.RELEASE'
+                jarDir = "build/libs"
+                jarFile = "omar-task-launcher-${versionNumber}.jar"
+                dockerDir = 'docker'
 	}
 	repositories {
 		mavenCentral()
@@ -13,9 +16,10 @@ buildscript {
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.ossim.gradleDefaults'
 
 group = 'omar-job-manager'
-version = '0.0.1-SNAPSHOT'
+version = versionNumber
 sourceCompatibility = 1.8
 
 repositories {

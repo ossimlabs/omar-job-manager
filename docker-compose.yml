@@ -1,0 +1,35 @@
+
+version: '3'
+services:
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=dg-bucket-db-prod
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata
+
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15671:15671
+      - 25672:25672
+
+  launcher:
+    image: quay.io/radiantsolutions/omar-task-launcher
+    depends_on:
+      - rabbit
+      - database
+
+  trigger:
+    image: quay.io/radiantsolutions/omar-task-trigger
+    ports:
+      - 8080:8080
+    depends_on:
+      - rabbit
+      - database
+
