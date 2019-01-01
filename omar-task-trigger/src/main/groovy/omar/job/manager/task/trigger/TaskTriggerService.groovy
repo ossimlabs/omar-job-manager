@@ -19,7 +19,7 @@ class TaskTriggerService
 	{
 		
 		//maven://[groupid]:[artifactid]:jar:[version]
-		String bucketScanUrl = "maven://omar-job-manager:omar-task-bucket-scan:jar:0.0.1-SNAPSHOT"
+		String bucketScanUrl = "maven://omar-job-manager:omar-task-bucket-scan:jar:1.0"
 //		String blueUrl = "maven://serverless-demo:serverless-demo-task-blue:jar:0.0.1-SNAPSHOT"
 		
 		List<String> input = new ArrayList<String>( Arrays.asList( payload.split( "," ) ) )
