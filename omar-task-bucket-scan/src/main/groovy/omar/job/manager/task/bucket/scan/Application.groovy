@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Bean
 class Application
 {
 	@Bean
-	BucketScanTask bucketScanTask()
+	BucketScan bucketScanTask()
 	{
-		return new BucketScanTask()
+		return new BucketScan()
 	}
 	
 	static void main( String[] args )

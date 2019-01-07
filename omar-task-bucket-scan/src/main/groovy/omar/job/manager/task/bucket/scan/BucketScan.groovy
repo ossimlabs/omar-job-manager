@@ -2,6 +2,7 @@ package omar.job.manager.task.bucket.scan
 
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.model.ListObjectsV2Request
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class BucketScanTask implements CommandLineRunner
+class BucketScan implements CommandLineRunner
 {
 
 	@Value('${cloud.aws.credentials.accessKey}')
@@ -20,18 +21,19 @@ class BucketScanTask implements CommandLineRunner
 	@Value('${cloud.aws.credentials.secretKey}')
 	String secretKey
 
-	BasicAWSCredentials awsCredentials = BasicAWSCredentials(accessKey, secretKey)
-
 	@Override
 	void run( String... strings ) throws Exception
 	{
+		BasicAWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey)
+
+
 		def clientRegion = 'us-east-1'
 		def bucketName = 'dg-1b-3090-t1'
 		def startAfter = null
 		def delimiter = '/'
 		
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-			.withCredentials( awsCredentials )
+			.withCredentials( new AWSStaticCredentialsProvider(awsCredentials) )
 			.withRegion( clientRegion )
 			.build()
 		
