@@ -1,7 +1,5 @@
 ---
 spring:
-  application:
-    name: ScanBucket Service
   datasource:
     url: jdbc:postgresql://localhost/dg-bucket-db-prod
     username: postgres
