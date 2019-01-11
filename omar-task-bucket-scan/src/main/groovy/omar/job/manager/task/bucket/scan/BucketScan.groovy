@@ -21,6 +21,9 @@ class BucketScan implements CommandLineRunner
 	@Value('${cloud.aws.credentials.secretKey}')
 	String secretKey
 
+	@Value('${cloud.aws.s3.bucket}')
+	String bucketName
+
 	@Override
 	void run( String... strings ) throws Exception
 	{
@@ -28,7 +31,6 @@ class BucketScan implements CommandLineRunner
 
 
 		def clientRegion = 'us-east-1'
-		def bucketName = 'dg-1b-3090-t1'
 		def startAfter = null
 		def delimiter = '/'
 		
