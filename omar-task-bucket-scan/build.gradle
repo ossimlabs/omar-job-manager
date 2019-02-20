@@ -52,7 +52,7 @@ publishing {
 				username System.getenv( 'MAVEN_REPOSITORY_USERNAME' )
 				password System.getenv( 'MAVEN_REPOSITORY_PASSWORD' )
 			}
-			url = "${ System.getenv( 'MAVEN_REPOSITORY_URL' ) }/omar-local-snapshot"
+			url = "${ System.getenv( 'MAVEN_REPO_URL' ) }/omar-local-snapshot"
 		}
 	}
 }
